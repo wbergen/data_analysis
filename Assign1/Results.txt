@@ -1,0 +1,78 @@
+Exercise #1:
+
+Procedure:
+xn is dataset from sample data #n: x1, x2 etc.
+length is length of sample data xn: [20,100,100,30,40]
+# test=rnorm(length)
+# hist(test); qqnorm(test)
+# hist(xn); hist(xn)
+
+Based on this procedure:
+x1 appears to be from a normal distribution
+x2 appears to NOT be from a normal distribution
+x3 appears to be from a normal distribution
+x4 appears to be from a normal distribution
+x5 appears to NOT be from a normal distribution
+
+
+* T-Test Section
+ - Null Hypothesis: "..the population means of the two populations are equal."
+ - Alt. Hypothesis: "..the populations means of the two populations are NOT equal."
+
+Running this over and over again results in power of ~ .48
+
+
+
+
+
+Exercise #2:
+
+Procedure:
+ - See powerlevel2.R
+1.
+Running powerlevel2.R many times results in a power of ~ .05, indicating that only about 50 of the iterations resulted in p-values > .05
+
+ReRunning powerlevel2.R many times w/ power=mean(p<0.1) results in a power of ~ .1, indicating that only about 100 of the iterations resulted in p-values > .1
+
+Histogram of p after an average run is a relatively uniform distribution, where each p value is similarly likely.
+
+2.
+Changing the standard deviation from 10 to 1 makes little to no difference.
+As before, at 95% confidence, power~=.05, and at 90%, power~=.1.
+The distribution of p is not noticablly different, even after comparing many runs.
+This makes sense given that a t-test is a way to test whether two data sets are significantly different from eachother, and so changing the standard deviation in BOTH samples to the same value will have no effect on the test's outcome.
+
+3.
+Changing the means has a definite effect on the outcomes.
+On average, power ~= .9 at 95% confidence, and ~= .94 at 90% confidence
+This means that roughly 90% of the p-values were below .05, and rougly 94% were below .1.
+Now that we have distinctly different samples (as the mean is no longer the same), the p values are are wholly skewed toward 0.
+
+4.
+Over 1000 tests, we collected two samples of equal size, but with varying means and standard deviations, and compared them for a significant difference using a two-sample t-test.  We stored the t-test p-values from each test (1000 p values) and used this vector to estimate, given particular inputs (mean, sample size, standard deviation), the probability that the t-test would reject the null-hypothesis, ie. reject that the two populations from which the samples come are the same.
+
+We determined over the course of the exercise that uniformly (ie. identically in both samples) changing any of the parameters has no effect on the power function of the t-test.  Only when we changed the sample means to be different from eachother did we see a high power result, indicating that the t-test would very likely reject the null hypothesis.
+
+
+Exercise #3:
+
+*All tests at 95% confidence level, ie. mean(p<.05).
+
+1. 
+powerlevel3.R produces the plot as requested.
+
+2.
+powerlevel3.R produces the plot (just change Exercise vars)
+
+3.
+powerlevel3.R produces the plot (just change Exercise vars)
+
+4.
+We've now changed our test.  We now approximate the power of a two-sample t-test, still using 1000 samples, over the set range of means 175:185, incremented by .1 (so 100 values).  Because mu=180, our range of nu approaches mu, and then diverges from mu.
+
+High power levels indicate that the t-test has a good probability of rejecting the null hypothesis, ie. reject that the two populations from which the sample come are the same.
+
+We can see in the plots in this exercise that power of the t-test and the disparity of the means (ie. the distance between them) are positively correlated, or, power is higher the greater abs(mu-nu) is.
+
+Question 3, where we use a standard deviation of 100 results in no pattern, or obvious relationships beyond the fact that for all values of nu, the power of the t-test is very bad, ie. < .08.
+This is due to the fact that sampling such a "wide" poplulation, with such a small sample approaches true randomness, and as such no t-test will be able to derive useful results from it.

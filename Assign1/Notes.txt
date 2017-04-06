@@ -1,0 +1,72 @@
+Concepts from Assignment:
+
+
+Quantile..?
+
+Simulating possible outcomes of a two sample t-test
+
+
+
+*qqnorm on a sample from a normally distributed data set will be a straight line, and deviation from this line indicates non-normal distribution
+
+
+
+
+
+
+Specific R Notes:
+
+suppose y = a vector (a list)
+init w/ y=5*(1:5)
+y = [5,10,15,20,25]
+
+now mean y is clearly 15,
+mean(y) >> 15
+
+the following results in a binary, T/F, vector
+y>10 >> [1] FALSE FALSE TRUE TRUE TRUE
+further, the mean of that binary list:
+mean(y>10) >> 0.6
+
+
+
+**rnorm signature:
+ - rnorm(n, mean = 0, sd = 1)
+ - n=size
+ - mean=mean
+ - sd=standard deviation
+
+**t.test signature:
+ - t.test(x,y,options)
+ - x=non-empty numeric vector
+ - y=maybe-empty numeric vector (non-empty = two-sample t-test)
+ - options are numerous, here's what we're using:
+ 	- var.equal=BOOL: "a logical variable indicating whether to treat the two variances as being equal" (from help("t.test"))
+
+**seq() use:
+ - seq(x,y,by=inc)
+ - generate a sequence of numbers from x to y, in inc increments
+ - seq(1,10,by=1): [1,2,3,4,5,6,7,8,9,10]
+ - seq(1,2,by=0.1): [1.1, 1.2, 1.3, ..., ..2]
+
+
+
+Exercise 1 Notes:
+
+* We're generating fake data based on the following:
+	- 180 mean (population) height of men
+	- 175 mean (pop.) height of women
+	- 30: sample size
+	- sd: 10
+* Generate "samples":
+	- x=rnorm(m,mu,sd)
+		--> x=rnorm(30,180,10)
+	- y=rnorm(n,nu.sd)
+		--> as above
+* Run 2-sample t-test:
+	t.test(x,y,var.equal=TRUE)
+
+
+
+Questions on Assignment:
+For exercise 1: should we include all the plots, or just indicate which we think were sampled from a normal distribution?
